@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,6 +36,8 @@ public class ConseillerWsREST {
 	@Autowired
 	private IContratDAO contratDAO;
 	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	// ============ SETTER ====================//
 
 	/**
@@ -104,6 +107,9 @@ public class ConseillerWsREST {
 	 */
 	@RequestMapping(value = "/conseiller/save", method = RequestMethod.POST)
 	public void saveConseiller(@RequestBody Conseiller pConseiller) {
+		if(pConseiller.getId() == 0 ) {
+			pConseiller.setMotDePasse(passwordEncoder.encode(pConseiller.getMotDePasse()));
+		}
 		conseillerDao.save(pConseiller);
 	}// end saveConseiller
 
