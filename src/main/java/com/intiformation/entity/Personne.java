@@ -56,7 +56,7 @@ public class Personne implements Serializable{
 	
 	
 	// Association avec Adresse
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval=true)
 	@JoinColumn(name = "adresse_id", referencedColumnName = "id_adresse")
 	//@JsonManagedReference("personne-adresse")
 	private Adresse adresse;

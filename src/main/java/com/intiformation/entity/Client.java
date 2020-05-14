@@ -27,11 +27,11 @@ import lombok.NoArgsConstructor;
 @DiscriminatorValue("client")
 public class Client extends Personne {
 	// _________________Propriétés_______________ //
-	@OneToMany(cascade = CascadeType.PERSIST, mappedBy="client")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="client", orphanRemoval=true)
 	@JsonBackReference("contrat-client")
 	private List<Contrat> listContrat;
 	
-	@OneToMany(cascade = CascadeType.PERSIST, mappedBy="client")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="client", orphanRemoval=true)
 	@JsonBackReference("visite-client")
 	private List<Visite> listeVisite;
 	

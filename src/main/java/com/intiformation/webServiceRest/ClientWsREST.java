@@ -1,5 +1,6 @@
 package com.intiformation.webServiceRest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.intiformation.entity.Client;
+import com.intiformation.entity.Contrat;
+import com.intiformation.entity.Visite;
 import com.intiformation.repository.IClientDao;
+import com.intiformation.repository.IContratDAO;
+import com.intiformation.repository.IVisiteDao;
 
 @RestController // declare la classe comme webservice
 @RequestMapping("/spring-rest") //URL du web service rest
@@ -26,6 +31,12 @@ public class ClientWsREST {
 	@Autowired
 	private IClientDao clientDao;
 
+	@Autowired
+	private IVisiteDao visiteDao;
+	
+	@Autowired
+	private IContratDAO contratDAO;
+	
 	// ============ SETTER ====================//
 
 	/**
@@ -36,9 +47,19 @@ public class ClientWsREST {
 	public void setClientDao(IClientDao clientDao) {
 		this.clientDao = clientDao;
 	}
+	
+	public void setVisiteDao(IVisiteDao visiteDao) {
+		this.visiteDao = visiteDao;
+	}
+
+	public void setContratDAO(IContratDAO contratDAO) {
+		this.contratDAO = contratDAO;
+	}
 
 	// ========Méthodes (Services) à exposer dans le WS===========//
 
+
+	
 
 	// ===========================================================//
 	// =========== Liste ALL Clients ====================//
@@ -104,7 +125,21 @@ public class ClientWsREST {
 	 */
 	@RequestMapping(value = "/client/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Boolean> deleteClient(@PathVariable("id") int pIdClient) {
+		System.out.println("id du client à suppr"+ pIdClient);
+		Client clientASuppr = clientDao.findById(pIdClient).get();
+		clientASuppr.setListeClasseStandard(new ArrayList<>());
+		clientDao.save(clientASuppr);
 
+		for(Visite visite:clientASuppr.getListeVisite()) {
+			visite.setClient(null);
+			visiteDao.save(visite);
+		}
+		
+		for(Contrat contrat:clientASuppr.getListContrat()) {
+			contrat.setClient(null);
+			contratDAO.save(contrat);
+		}
+		
 		clientDao.deleteById(pIdClient);
 
 		// def de la reponse à renvoyer au client

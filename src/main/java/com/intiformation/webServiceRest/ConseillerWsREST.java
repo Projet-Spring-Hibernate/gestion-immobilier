@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.intiformation.entity.Conseiller;
+import com.intiformation.entity.Contrat;
+import com.intiformation.entity.Visite;
 import com.intiformation.repository.IConseillerDao;
+import com.intiformation.repository.IContratDAO;
+import com.intiformation.repository.IVisiteDao;
 
 @RestController // declare la classe comme webservice
 @RequestMapping("/spring-rest") //URL du web service rest
@@ -25,7 +29,12 @@ public class ConseillerWsREST {
 
 	@Autowired
 	private IConseillerDao conseillerDao;
-
+	@Autowired
+	private IVisiteDao visiteDao;
+	
+	@Autowired
+	private IContratDAO contratDAO;
+	
 	// ============ SETTER ====================//
 
 	/**
@@ -36,6 +45,14 @@ public class ConseillerWsREST {
 	public void setConseillerDao(IConseillerDao conseillerDao) {
 		this.conseillerDao = conseillerDao;
 	}
+	public void setVisiteDao(IVisiteDao visiteDao) {
+		this.visiteDao = visiteDao;
+	}
+
+	public void setContratDAO(IContratDAO contratDAO) {
+		this.contratDAO = contratDAO;
+	}
+
 
 	// ========Méthodes (Services) à exposer dans le WS===========//
 
@@ -105,6 +122,16 @@ public class ConseillerWsREST {
 	@RequestMapping(value = "/conseiller/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Boolean> deleteConseiller(@PathVariable("id") int pIdConseiller) {
 
+		Conseiller conseillerASuppr = conseillerDao.findById(pIdConseiller).get();
+		for(Visite visite:conseillerASuppr.getListeVisite()) {
+			visite.setClient(null);
+			visiteDao.save(visite);
+		}
+		
+		for(Contrat contrat:conseillerASuppr.getListeContrats()) {
+			contrat.setClient(null);
+			contratDAO.save(contrat);
+		}
 		conseillerDao.deleteById(pIdConseiller);
 
 		// def de la reponse à renvoyer au client
