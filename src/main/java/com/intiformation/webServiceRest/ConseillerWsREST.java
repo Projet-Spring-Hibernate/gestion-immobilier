@@ -94,6 +94,24 @@ public class ConseillerWsREST {
 
 		return conseillerDao.findById(pIdConseiller);
 	}// end conseilleryId
+	
+	// ===========================================================//
+	// =========== get by mail conseiller ======================//
+	// ===========================================================//
+
+	/**
+	 * Méthode exposée dans le ws pour la recup d'un conseiller par son mail dans la bdd url
+	 * d'accès :
+	 * http://localhost:8080/spring-rest/conseiller/get-by-email/{email}
+	 * (GET)
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/conseiller/get-by-email/{email}", method = RequestMethod.GET)
+	public Conseiller conseillerByMail(@PathVariable("email") String pEmail) {
+
+		return conseillerDao.findByEmail(pEmail);
+	}// end conseilleryId
 
 	// ===========================================================//
 	//======= save (ajouter+modifier) conseiller =============//

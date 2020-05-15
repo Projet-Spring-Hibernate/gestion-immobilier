@@ -97,39 +97,39 @@ public class Application implements CommandLineRunner {
 
 		// ----- Conseillers -------------- //
 
-		Conseiller conseiller1 = new Conseiller("conseiller1", "0123456789", "0698653212", "conseiller1@gmail.com",
+		Conseiller conseiller1 = new Conseiller("Fitz Parmentier", "0533573129", "+33655590247", "fitz.parmentier@intiimmobilier.com",
 				"$2a$10$OxNxmSL7nXjJrlEMvBlyoeU6DJOXnq1nnsxAXPgyg5XasuAON.ptG");
-		Conseiller conseiller2 = new Conseiller("conseiller2", "0123456789", "0698653212", "conseiller2@gmail.com",
+		Conseiller conseiller2 = new Conseiller("Didier Godin", "0485467528", "+33655591570", "didier.godin@intiimmobilier.com",
 				"$2a$10$OxNxmSL7nXjJrlEMvBlyoeU6DJOXnq1nnsxAXPgyg5XasuAON.ptG");
-		Conseiller conseiller3 = new Conseiller("conseiller3", "0123456789", "0698653212", "conseiller3@gmail.com",
+		Conseiller conseiller3 = new Conseiller("Mason Bériault", "0195392996", "+33775558436", "mason.beriault@intiimmobilier.com",
 				"$2a$10$OxNxmSL7nXjJrlEMvBlyoeU6DJOXnq1nnsxAXPgyg5XasuAON.ptG");
 
 		// ----- Propriétaires -------------//
 
-		Proprietaire proprietaire1 = new Proprietaire("proprio1", "0123456789", "0698653212");
-		Proprietaire proprietaire2 = new Proprietaire("proprio2", "0123456789", "0698653212");
-		Proprietaire proprietaire3 = new Proprietaire("proprio3", "0123456789", "0698653212");
-		Proprietaire proprietaire4 = new Proprietaire("proprio4", "0123456789", "0698653212");
+		Proprietaire proprietaire1 = new Proprietaire("Dalmace Cantin", "0211988824", "+33655554452");
+		Proprietaire proprietaire2 = new Proprietaire("Grosvenor Rivière", "0443955745", "+33700555552");
+		Proprietaire proprietaire3 = new Proprietaire("Victoire Dupuis", "0517454201", "+33700555876");
+		Proprietaire proprietaire4 = new Proprietaire("Avelaine DuLin", "0375369635", "+33655578183");
 
 		// ---- Client --------------------//
 
-		Client client1 = new Client("client1", "0123456789", "0698653212");
-		Client client2 = new Client("client2", "0123456789", "0698653212");
-		Client client3 = new Client("client3", "0123456789", "0698653212");
-		Client client4 = new Client("client4", "0123456789", "0698653212");
+		Client client1 = new Client("Iva Bédard", "0492899662", "+33700555335");
+		Client client2 = new Client("Clarimunda Margand", "0377645310", "+33735557905");
+		Client client3 = new Client("Hamilton Lambert", "0189508145", "+33655546282");
+		Client client4 = new Client("Evrard Dostie", "0473612572", "+33655570451");
 
 		// ---- Adresse pour les personnes ------------------//
-		Adresse adresse1 = new Adresse("rue1", "75000", "Paris");
-		Adresse adresse2 = new Adresse("rue2", "75000", "Paris");
-		Adresse adresse3 = new Adresse("rue3", "75000", "Paris");
-		Adresse adresse4 = new Adresse("rue4", "75000", "Paris");
-		Adresse adresse5 = new Adresse("rue5", "75000", "Paris");
-		Adresse adresse6 = new Adresse("rue6", "75000", "Paris");
-		Adresse adresse7 = new Adresse("rue7", "75000", "Paris");
-		Adresse adresse8 = new Adresse("rue8", "75000", "Paris");
-		Adresse adresse9 = new Adresse("rue9", "75000", "Paris");
-		Adresse adresse10 = new Adresse("ru10", "75000", "Paris");
-		Adresse adresse11 = new Adresse("rue11", "75000", "Paris");
+		Adresse adresse1 = new Adresse("26, rue Pierre De Coubertin", "31100", "TOULOUSE");
+		Adresse adresse2 = new Adresse("90, Rue Hubert de Lisle", "34400", "LUNEL");
+		Adresse adresse3 = new Adresse("48, Cours Marechal-Joffre", "76200", "DIEPPE");
+		Adresse adresse4 = new Adresse("95, place Stanislas", "92000", "NANTERRE");
+		Adresse adresse5 = new Adresse("32, avenue Jules Ferry", "02200", "SOISSONS");
+		Adresse adresse6 = new Adresse("12, rue des Coudriers", "76130", "MONT-SAINT-AIGNAN");
+		Adresse adresse7 = new Adresse("93, rue Adolphe Wurtz", "97231", "LE ROBERT");
+		Adresse adresse8 = new Adresse("79, rue Gontier-Patin", "47000", "AGEN");
+		Adresse adresse9 = new Adresse("34, rue La Boétie", "75015", "PARIS");
+		Adresse adresse10 = new Adresse("69, Place Napoléon", "53000", "LAVAL");
+		Adresse adresse11 = new Adresse("92, avenue Voltaire", "78600", "MAISONS-LAFFITTE");
 
 		// --- Attribution des adresses aux personnes ---------//
 
@@ -235,15 +235,15 @@ public class Application implements CommandLineRunner {
 		BienALouer bienlouer3 = new BienALouer("disponible", "01/01/2020", "0", "01/02/2020", "assets/images/photo9.jpg", "entrepot","commercial", 110, "à restorer", 1500, 1500, 300, "bail 1 an", "non meublé");
 		
 		// ---- Adresse pour les biens ------------------//
-		Adresse adresse1b = new Adresse("rue1b", "75000", "Paris");
-		Adresse adresse2b = new Adresse("rue2b", "75000", "Paris");
-		Adresse adresse3b = new Adresse("rue3b", "75000", "Paris");
-		Adresse adresse4b = new Adresse("rue4b", "75000", "Paris");
-		Adresse adresse5b = new Adresse("rue5b", "75000", "Paris");
-		Adresse adresse6b = new Adresse("rue6b", "75000", "Paris");
-		Adresse adresse7b = new Adresse("rue7b", "75000", "Paris");
-		Adresse adresse8b = new Adresse("rue8b", "75000", "Paris");
-		Adresse adresse9b = new Adresse("rue9b", "75000", "Paris");
+		Adresse adresse1b = new Adresse("89, rue Goya", "72100", "LE MANS");
+		Adresse adresse2b = new Adresse("80, rue Goya", "77350", "LE MÉE-SUR-SEINE");
+		Adresse adresse3b = new Adresse("1, rue Charles Corbeau", "27000", "ÉVREUX");
+		Adresse adresse4b = new Adresse("64, rue Cazade", "91210", "DRAVEIL");
+		Adresse adresse5b = new Adresse("78, Avenue des Pr'es", "34000", "MONTPELLIER");
+		Adresse adresse6b = new Adresse("88, rue des six frères Ruellan", "95200", "SARCELLES");
+		Adresse adresse7b = new Adresse("8, rue du Paillle en queue", "92300", "LEVALLOIS-PERRET");
+		Adresse adresse8b = new Adresse("65, avenue Jean Portalis", "93290", "TREMBLAY-EN-FRANCE");
+		Adresse adresse9b = new Adresse("32, Rue Bonnet", "38500", "VOIRON");
 
 		//-----lien adresse avec les biens-------
 		
