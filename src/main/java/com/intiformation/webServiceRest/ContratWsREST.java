@@ -17,10 +17,9 @@ import com.intiformation.entity.Conseiller;
 import com.intiformation.entity.Contrat;
 import com.intiformation.repository.IContratDAO;
 
-
 @RestController // declare la classe comme webservice
-@RequestMapping("/spring-rest") //URL du web service rest
-@CrossOrigin(origins="http://localhost:4200")
+@RequestMapping("/spring-rest") // URL du web service rest
+@CrossOrigin(origins = "http://localhost:4200")
 public class ContratWsREST {
 
 	// ========== DAO =========================//
@@ -41,7 +40,6 @@ public class ContratWsREST {
 
 	// ========Méthodes (Services) à exposer dans le WS===========//
 
-
 	// ===========================================================//
 	// =========== Liste ALL Contrats ====================//
 	// ===========================================================//
@@ -58,15 +56,13 @@ public class ContratWsREST {
 		System.out.println("Je suis dans getAllContratBdd ws REST ");
 		return contratDao.findAll();
 	}// end getAllFonctionnairesBdd
-	// ===========================================================//
-	// =========== get by id contrat ======================//
-	// ===========================================================//
+		// ===========================================================//
+		// =========== get by id contrat ======================//
+		// ===========================================================//
 
 	/**
-	 * Méthode exposée dans le ws pour la recup d'un contrat dans la bdd url
-	 * d'accès :
-	 * http://localhost:8080/spring-rest/contrat/get-by-id/{id}
-	 * (GET)
+	 * Méthode exposée dans le ws pour la recup d'un contrat dans la bdd url d'accès
+	 * : http://localhost:8080/spring-rest/contrat/get-by-id/{id} (GET)
 	 * 
 	 * @return
 	 */
@@ -77,7 +73,7 @@ public class ContratWsREST {
 	}// end contratyId
 
 	// ===========================================================//
-	//======= save (ajouter+modifier) contrat =============//
+	// ======= save (ajouter+modifier) contrat =============//
 	// ===========================================================//
 
 	/**
@@ -92,15 +88,12 @@ public class ContratWsREST {
 		contratDao.save(pContrat);
 	}// end saveContrat
 
-
 	// ===========================================================//
 	// =========== delete contrat ===============================//
 	// ===========================================================//
 	/**
 	 * Méthode exposée dans le ws pour la suppression d'un contrat dans la bdd. Url
-	 * d'accès :
-	 * http://localhost:8080/spring-rest/contrat/delete/{id}
-	 * (DELETE)
+	 * d'accès : http://localhost:8080/spring-rest/contrat/delete/{id} (DELETE)
 	 * 
 	 * @return
 	 */
@@ -115,24 +108,54 @@ public class ContratWsREST {
 		 */
 		return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
 	}// end deleteContrat
+
+	// ===========================================================//
+	// =========== get by Conseiller ======================//
+	// ===========================================================//
+
+	/**
+	 * Méthode exposée dans le ws pour la recup d'un contrat par son conseiller dans la bdd url d'accès
+	 * : http://localhost:8080/spring-rest/contrat/get-by-idconseiller/{id} (GET)
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/contrat/get-by-idconseiller/{id}", method = RequestMethod.GET)
+	public List<Contrat> contratbyIdConseiller(@PathVariable("id") int id) {
+
+		System.out.println(contratDao.findByConseillerId(id));
+		return contratDao.findByConseillerId(id);
+	}// end 
 	
 	// ===========================================================//
-		// =========== get by Conseiller ======================//
-		// ===========================================================//
+	// =========== get by client ======================//
+	// ===========================================================//
 
-		/**
-		 * Méthode exposée dans le ws pour la recup d'un contrat dans la bdd url
-		 * d'accès :
-		 * http://localhost:8080/spring-rest/contrat/get-by-idonseiller/{id}
-		 * (GET)
-		 * 
-		 * @return
-		 */
-		@RequestMapping(value = "/contrat/get-by-idconseiller/{id}", method = RequestMethod.GET)
-		public List<Contrat> contratbyIdConseiller(@PathVariable("id") int id) {
+	/**
+	 * Méthode exposée dans le ws pour la recup d'un contrat par son client dans la bdd url d'accès
+	 * : http://localhost:8080/spring-rest/contrat/get-by-idclient/{id} (GET)
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/contrat/get-by-idclient/{id}", method = RequestMethod.GET)
+	public List<Contrat> contratbyIdClient(@PathVariable("id") int id) {
+
+		return contratDao.findByClientId(id);
+	}// end 
 	
-			System.out.println(contratDao.findByConseillerId(id));
-			return contratDao.findByConseillerId(id);
-		}// end contratyId
+	// ===========================================================//
+	// =========== get by bien ======================//
+	// ===========================================================//
+
+	/**
+	 * Méthode exposée dans le ws pour la recup d'un contrat par son bien dans la bdd url d'accès
+	 * : http://localhost:8080/spring-rest/contrat/get-by-idBien/{id} (GET)
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/contrat/get-by-idBien/{id}", method = RequestMethod.GET)
+	public Contrat contratbyIdBien(@PathVariable("id") int id) {
+
+		return contratDao.findByBienImmobilierIdBien(id);
+	}// end 
 
 }// end class

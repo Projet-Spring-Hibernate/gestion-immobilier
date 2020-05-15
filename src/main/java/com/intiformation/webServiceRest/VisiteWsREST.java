@@ -115,20 +115,40 @@ public class VisiteWsREST {
 	}// end deleteVisite
 	
 	// ===========================================================//
-	// =========== get by id conseiller ======================//
+	// =========== get by id bien ======================//
 	// ===========================================================//
 
 	/**
-	 * Méthode exposée dans le ws pour la recup d'un visite dans la bdd url
+	 * Méthode exposée dans le ws pour la recup d'un visite à partir de l'id du bien dans la bdd url
 	 * d'accès :
-	 * http://localhost:8080/spring-rest/visite/get-by-idconseiller/{id}
+	 * http://localhost:8080/spring-rest/visite/get-by-idBien/{id}
 	 * (GET)
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/visite/get-by-idconseiller/{id}", method = RequestMethod.GET)
-	public List<Visite> visitebyIdConseiller(@PathVariable("id") int id) {
+	@RequestMapping(value = "/visite/get-by-idBien/{id}", method = RequestMethod.GET)
+	public List<Visite> visitebyIdBien(@PathVariable("id") int id) {
 
-		return visiteDao.findByConseillerId(id);
-	}// end visiteyId
+		return visiteDao.findByBienImmobilierIdBien(id);
+	}// end 
+	
+	
+	
+	// ===========================================================//
+	// =========== get by id client ======================//
+	// ===========================================================//
+
+	/**
+	 * Méthode exposée dans le ws pour la recup d'un visite à partir de l'id du client dans la bdd url
+	 * d'accès :
+	 * http://localhost:8080/spring-rest/visite/get-by-idclient/{id}
+	 * (GET)
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/visite/get-by-idclient/{id}", method = RequestMethod.GET)
+	public List<Visite> visitebyIdClient(@PathVariable("id") int id) {
+
+		return visiteDao.findByClientId(id);
+	}// end 
 }// end class

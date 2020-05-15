@@ -108,6 +108,13 @@ public class ClientWsREST {
 	 */
 	@RequestMapping(value = "/client/save", method = RequestMethod.POST)
 	public void saveClient(@RequestBody Client pClient) {
+		
+		if(pClient.getId()!=0) {
+			Client clientAvantModif = clientDao.findById(pClient.getId()).get();
+			pClient.setListeVisite(clientAvantModif.getListeVisite());
+			pClient.setListContrat(clientAvantModif.getListContrat());
+		}
+		
 		clientDao.save(pClient);
 	}// end saveClient
 
