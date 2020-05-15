@@ -115,6 +115,24 @@ public class VisiteWsREST {
 	}// end deleteVisite
 	
 	// ===========================================================//
+	// =========== get by id conseiller ======================//
+	// ===========================================================//
+
+	/**
+	 * Méthode exposée dans le ws pour la recup d'un visite à partir de l'id du bien dans la bdd url
+	 * d'accès :
+	 * http://localhost:8080/spring-rest/visite/get-by-idconseiller/{id}
+	 * (GET)
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/visite/get-by-idconseiller/{id}", method = RequestMethod.GET)
+	public List<Visite> visitebyIdConseiller(@PathVariable("id") int id) {
+
+		return visiteDao.findByConseillerId(id);
+	}// end 
+	
+	// ===========================================================//
 	// =========== get by id bien ======================//
 	// ===========================================================//
 

@@ -494,8 +494,7 @@ public class Application implements CommandLineRunner {
 		
 		
 		System.out.println("\n\n... La base de données a bien été initialisée ...\n\n");
-		
-		System.out.println(contratDao.findByBienImmobilierIdBien(3));
+
 	
 	}// end run
 
