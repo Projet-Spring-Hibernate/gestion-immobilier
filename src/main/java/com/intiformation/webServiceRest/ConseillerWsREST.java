@@ -1,5 +1,6 @@
 package com.intiformation.webServiceRest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -107,6 +108,14 @@ public class ConseillerWsREST {
 	 */
 	@RequestMapping(value = "/conseiller/save", method = RequestMethod.POST)
 	public void saveConseiller(@RequestBody Conseiller pConseiller) {
+		if(pConseiller.getId()!=0) {
+			Conseiller conseillerAvantModif = conseillerDao.findById(pConseiller.getId()).get();
+			pConseiller.setListeContrats(conseillerAvantModif.getListeContrats());
+			pConseiller.setListeVisite(conseillerAvantModif.getListeVisite());
+		}else {
+			pConseiller.setListeContrats(new ArrayList<>());
+			pConseiller.setListeVisite(new ArrayList<>());
+		}
 		if(pConseiller.getId() == 0 ) {
 			pConseiller.setMotDePasse(passwordEncoder.encode(pConseiller.getMotDePasse()));
 		}

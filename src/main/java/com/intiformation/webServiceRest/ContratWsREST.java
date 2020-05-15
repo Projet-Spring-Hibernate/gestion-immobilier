@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.intiformation.entity.BienImmobilier;
 import com.intiformation.entity.Conseiller;
 import com.intiformation.entity.Contrat;
+import com.intiformation.repository.IBienImmobilerDao;
 import com.intiformation.repository.IContratDAO;
 
 @RestController // declare la classe comme webservice
@@ -26,6 +28,9 @@ public class ContratWsREST {
 
 	@Autowired
 	private IContratDAO contratDao;
+	
+	@Autowired
+	private IBienImmobilerDao bienImmobilerDao;
 
 	// ============ SETTER ====================//
 
@@ -100,8 +105,18 @@ public class ContratWsREST {
 	@RequestMapping(value = "/contrat/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Boolean> deleteContrat(@PathVariable("id") int pIdContrat) {
 
-		contratDao.deleteById(pIdContrat);
+		System.out.println("\n\n"+pIdContrat+"\n\n");
+		Contrat contratASuppr = contratDao.findById(pIdContrat).get();
+		BienImmobilier bienDuContrat=contratASuppr.getBienImmobilier();
+//		contratASuppr.setBienImmobilier(null);
+//		contratASuppr.setConseiller(null);
+//		contratASuppr.setClient(null);
+//		contratDao.save(contratASuppr);
+		bienDuContrat.setContrat(null);
+		bienImmobilerDao.save(bienDuContrat);
+		//contratDao.deleteById(pIdContrat);
 
+		System.out.println("\n\n");
 		// def de la reponse à renvoyer au client
 		/**
 		 * Renvoi d'un true => suppression ok renvoi d'un code 200 OK
