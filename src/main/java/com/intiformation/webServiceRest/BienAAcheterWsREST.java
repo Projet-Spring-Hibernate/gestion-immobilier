@@ -1,5 +1,6 @@
 package com.intiformation.webServiceRest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.intiformation.entity.BienAAcheter;
+import com.intiformation.entity.Conseiller;
 import com.intiformation.repository.IBienAAcheterDao;
 
 @RestController // declare la classe comme webservice
@@ -87,6 +89,14 @@ public class BienAAcheterWsREST {
 	 */
 	@RequestMapping(value = "/bienAAcheter/save", method = RequestMethod.POST)
 	public void saveBienAAcheter(@RequestBody BienAAcheter pBienAAcheter) {
+		if(pBienAAcheter.getIdBien()!=0) {
+			BienAAcheter bienAvantModif = bienAAcheterDao.findById(pBienAAcheter.getIdBien()).get();
+			pBienAAcheter.setContrat(bienAvantModif.getContrat());
+			pBienAAcheter.setListeVisite(bienAvantModif.getListeVisite());
+		}else {
+			pBienAAcheter.setContrat(null);
+			pBienAAcheter.setListeVisite(new ArrayList<>());
+		}
 		bienAAcheterDao.save(pBienAAcheter);
 	}// end saveBienAAcheter
 

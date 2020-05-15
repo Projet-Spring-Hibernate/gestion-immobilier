@@ -1,5 +1,6 @@
 package com.intiformation.webServiceRest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.intiformation.entity.BienAAcheter;
 import com.intiformation.entity.BienALouer;
 import com.intiformation.repository.IBienALouerDao;
 
@@ -87,6 +89,14 @@ public class BienALouerWsREST {
 	 */
 	@RequestMapping(value = "/bienALouer/save", method = RequestMethod.POST)
 	public void saveBienALouer(@RequestBody BienALouer pBienALouer) {
+		if(pBienALouer.getIdBien()!=0) {
+			BienALouer bienAvantModif = bienALouerDao.findById(pBienALouer.getIdBien()).get();
+			pBienALouer.setContrat(bienAvantModif.getContrat());
+			pBienALouer.setListeVisite(bienAvantModif.getListeVisite());
+		}else {
+			pBienALouer.setContrat(null);
+			pBienALouer.setListeVisite(new ArrayList<>());
+		}
 		bienALouerDao.save(pBienALouer);
 	}// end saveBienALouer
 
